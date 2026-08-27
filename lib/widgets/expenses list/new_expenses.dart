@@ -38,8 +38,19 @@ class _NewExpensesState extends State<NewExpenses> {
           ),
           Row(
             children: [
-              TextButton(onPressed: () {}, child: Text("Cancel")),
-              ElevatedButton(onPressed: () {}, child: Text('Save Expense')),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text("Cancel"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  print(_titleController.text);
+                  print(_amountController.text);
+                },
+                child: Text('Save Expense'),
+              ),
             ],
           ),
         ],

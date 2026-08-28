@@ -5,7 +5,8 @@ import 'package:intl/intl.dart';
 final formatter = DateFormat.yMd();
 
 class NewExpenses extends StatefulWidget {
-  const NewExpenses({super.key});
+  const NewExpenses({super.key, required this.onAddExpense});
+  final void Function(Expense expense) onAddExpense;
 
   @override
   State<NewExpenses> createState() => _NewExpensesState();
@@ -61,6 +62,14 @@ class _NewExpensesState extends State<NewExpenses> {
       );
       return;
     }
+    widget.onAddExpense(
+      Expense(
+        amount: enterdAmount,
+        date: _dateTime!,
+        title: _titleController.text,
+        category: _selectedCategory,
+      ),
+    );
   }
 
   @override
@@ -145,9 +154,7 @@ class _NewExpensesState extends State<NewExpenses> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  _submitExpenseData;
-                  child:
-                  Text('Save Expense');
+                  _submitExpenseData();
                 },
                 child: Text('Save Expense'),
               ),

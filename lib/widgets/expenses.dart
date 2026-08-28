@@ -26,20 +26,20 @@ class _ExpensesState extends State<Expenses> {
       title: "Cinema",
       category: Category.leisure,
     ),
-    Expense(
-      amount: 50.20,
-      date: DateTime.now(),
-      title: "Dhaka",
-      category: Category.travel,
-    ),
   ];
   void _openAddExpensesOverlay() {
     showModalBottomSheet(
       context: context,
       builder: (context) {
-        return NewExpenses();
+        return NewExpenses(onAddExpense: _addExpenses);
       },
     );
+  }
+
+  void _addExpenses(Expense expense) {
+    setState(() {
+      _registeredExpenses.add(expense);
+    });
   }
 
   @override

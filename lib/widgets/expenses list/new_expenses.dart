@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:tracker_app/models/expense.dart';
 
@@ -30,6 +32,15 @@ class _NewExpensesState extends State<NewExpenses> {
         _dateTime = pickedDate;
       });
     });
+  }
+
+  void _submitExpenseData() {
+    final enterdAmount = double.tryParse(_amountController.text);
+    final amountIsInvalid = enterdAmount == null || enterdAmount <= 0;
+
+    if (_titleController.text.trim().isEmpty ||
+        amountIsInvalid ||
+        _dateTime == null) {}
   }
 
   @override

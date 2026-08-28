@@ -1,7 +1,8 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:tracker_app/models/expense.dart';
+import 'package:intl/intl.dart';
+
+final formatter = DateFormat.yMd();
 
 class NewExpenses extends StatefulWidget {
   const NewExpenses({super.key});
@@ -40,7 +41,26 @@ class _NewExpensesState extends State<NewExpenses> {
 
     if (_titleController.text.trim().isEmpty ||
         amountIsInvalid ||
-        _dateTime == null) {}
+        _dateTime == null) {
+      showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: Text("Invalid Input"),
+          content: Text(
+            "Please Sure a valid title, amount date and category was entered",
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(ctx);
+              },
+              child: Text("Okay"),
+            ),
+          ],
+        ),
+      );
+      return;
+    }
   }
 
   @override
@@ -125,8 +145,9 @@ class _NewExpensesState extends State<NewExpenses> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  print(_titleController.text);
-                  print(_amountController.text);
+                  _submitExpenseData;
+                  child:
+                  Text('Save Expense');
                 },
                 child: Text('Save Expense'),
               ),

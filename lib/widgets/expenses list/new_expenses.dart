@@ -13,17 +13,21 @@ class _NewExpensesState extends State<NewExpenses> {
   final _amountController = TextEditingController();
   DateTime? _dateTime;
 
-  void _presentDatePicker() async {
+  void _presentDatePicker() {
     final now = DateTime.now();
     final firstDate = DateTime(now.year - 1, now.month, now.day);
-    final pickedDate = await showDatePicker(
+    showDatePicker(
       context: context,
       initialDate: now,
       firstDate: firstDate,
       lastDate: now,
-    );
-    setState(() {
-      _dateTime = pickedDate;
+    ).then((pickedDate) {
+      if (pickedDate == null) {
+        return;
+      }
+      setState(() {
+        _dateTime = pickedDate;
+      });
     });
   }
 
